@@ -1,4 +1,4 @@
-% function ctrl = makeController()
+function makeController()
 % MAKECONTROLLER Design the controller.
 
 Nx = 12;    % Number of states
@@ -18,14 +18,14 @@ x0 = [...
    -0.0000;
    -0.0000;
    -0.0000;
-];
+]; %#ok<NASGU>
 
 u0 = [...
     0.0370;
    -0.0000;
          0;
     0.1219;
-];
+]; %#ok<NASGU>
 
 A = [...
          0         0         0         0         0         0    0.9995         0    0.0308         0         0         0;
@@ -65,42 +65,20 @@ C = [...
 
 D = zeros(Nr,Nu);
 
-% % LQR synthesis
-% r = 10;
-% Q = diag(ones(Nx,1));
-% R = r*diag(ones(Nu,1));
-% [K,S,e] = lqr(A,B,Q,R);
-
-% % LQR synthesis
-% r = 10;
-% Q = diag(ones(Nx,1));
-% R = r*diag(ones(Nu,1));
-% % Add integral action
-% A = [A zeros(Nx,Nr); -C zeros(Nr)];
-% B = [B; -D];
-% Q = blkdiag(Q,diag(ones(Nr,1)));
-% [K,S,e] = lqr(A,B,Q,R);
-
-% LQR synthesis
+% Reduce system
 sys = ss(A,B,C,D);
 [sysr,T] = minreal(sys);
 NxRed = size(sysr.A,1);
+
+% LQR synthesis
 r = 10;
 Q = T\diag(ones(Nx,1))*T;
 Q = Q(1:NxRed,1:NxRed);
 Q = blkdiag(Q,diag(ones(Nr,1)));
 R = r*diag(ones(Nu,1));
 N = zeros(NxRed+Nr,Nu);
-[K,S,e] = lqi(sysr,Q,R,N);
-
-% % LQR synthesis
-% r = 10;
-% Q = diag(ones(Nx+Nr,1));
-% R = r*diag(ones(Nu,1));
-% N = zeros(Nx+Nr,Nu);
-% sys = ss(A,B,C,D);
-% [K,S,e] = lqi(sys,Q,R,N);
+[K,S,e] = lqi(sysr,Q,R,N); %#ok<ASGLU>
 
 save('data/controller');
 
-% end
+end
