@@ -1,0 +1,50 @@
+# Ignore autosave files
+*.asv
+*.m~
+*.autosave
+
+# Packaged app and toolbox files
+*.mlappinstall
+*.mltbx
+
+# Compiled MEX binaries (all platforms)
+*.mex*
+
+# Generated helpsearch folders
+helpsearch*/
+
+# Simulink code generation folders
+slprj/
+sccprj/
+
+# Matlab code generation folders
+codegen/
+
+# Simulink autosave extension
+*.autosave
+
+# Simulink cache files
+*.slxc
+
+# Simulink files of previous version
+*.slx.original
+*.slx.r*
+
+# Temporary files
+*.fuse_hidden*
+*.kate-swp
+
+# Other files to ignore
+*.pdf
+*.htmx
+*.avi
+*.mp4
+.directory
+.DS_Store
+
+# Other folders to ignore
+doc/
+build/
+results/
+report/
+sandbox/
