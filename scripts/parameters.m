@@ -13,4 +13,4 @@ P.rho = 1.2250;
 P.gravity = 9.81;
 
 % Sampling time
-P.Ts = 0.01;
+P.Ts = 0.001;
