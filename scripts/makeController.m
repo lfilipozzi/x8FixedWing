@@ -22,7 +22,7 @@ end
 
 Nx = 12;    % Number of states
 Nu = 4;     % Number of inputs
-Nr = 3;     % Number of targets
+Nr = 2;     % Number of targets
 
 x0 = [...
    -0.0000;
@@ -100,7 +100,7 @@ else
 end
 
 C = [...
-    0 0 0 0 0 0 1 0 0 0 0 0;    % Airspeed
+    ...0 0 0 0 0 0 1 0 0 0 0 0;    % Airspeed
     0 0 0 1 0 0 0 0 0 0 0 0;    % Roll angle
     0 0 0 0 1 0 0 0 0 0 0 0;    % Pitch angle
 ];
