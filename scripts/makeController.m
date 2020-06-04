@@ -113,11 +113,17 @@ sys = ss(A,B,C,D);
 NxRed = size(sysr.A,1);
 
 % LQR synthesis
-r = 10;
-Q = T\diag(ones(Nx,1))*T;
-Q = Q(1:NxRed,1:NxRed);
-Q = blkdiag(Q,diag(ones(Nr,1)));
-R = r*diag(ones(Nu,1));
+xmax = [100 100 100 10*pi/180 10*pi/180 10*pi/180 20 1 1 5 5 5]';
+umax = [0.05 0.05 0.05 0.5]';
+ymax = C*xmax;
+rx = 1e0;
+rr = 1e3;
+ru = 1e-1;
+Qx = rx * (T\diag(1./xmax.^2)*T);
+Qx = Qx(1:NxRed,1:NxRed);
+Qr = rr*diag(1./ymax.^2);
+Q = blkdiag(Qx,Qr);
+R = ru*diag(1./umax.^2);
 N = zeros(NxRed+Nr,Nu);
 [K,S,e] = lqi(sysr,Q,R,N); %#ok<ASGLU>
 
